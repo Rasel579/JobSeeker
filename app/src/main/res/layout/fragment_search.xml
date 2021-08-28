@@ -5,18 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.SearchFragment">
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        >
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/tool_bar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/ic_back"
-            />
-    </com.google.android.material.appbar.AppBarLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searcher"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -37,7 +25,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_text_search_field"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
     <Button
         android:id="@+id/search_btn"

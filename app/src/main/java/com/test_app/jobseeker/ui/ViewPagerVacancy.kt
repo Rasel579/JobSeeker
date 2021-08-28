@@ -15,8 +15,10 @@ import com.test_app.jobseeker.models.Repo
 import com.test_app.jobseeker.models.api.data.JobsDTO
 import com.test_app.jobseeker.presenters.VacancyPresenter
 import com.test_app.jobseeker.ui.daggerAbs.AbsFragment
+import com.test_app.jobseeker.utils.maps.MapView
 import com.test_app.jobseeker.utils.schedulers.Schedulers
 import com.test_app.jobseeker.view.VacancyView
+import kotlinx.android.synthetic.main.activity_main.view.*
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
@@ -36,6 +38,9 @@ class ViewPagerVacancy : AbsFragment(R.layout.fragment_view_pager_vacancy), Vaca
 
     @Inject
     lateinit var router: Router
+
+    @Inject
+    lateinit var map : MapView
 
     @Inject
     lateinit var repo: Repo
@@ -59,7 +64,7 @@ class ViewPagerVacancy : AbsFragment(R.layout.fragment_view_pager_vacancy), Vaca
 
 
     override fun showData(data: JobsDTO) {
-        viewBinding.viewPager.adapter = ViewPagerAdapter(data)
+        viewBinding.viewPager.adapter = ViewPagerAdapter(data, map)
     }
 
     override fun showError(error: Throwable) {
@@ -69,4 +74,5 @@ class ViewPagerVacancy : AbsFragment(R.layout.fragment_view_pager_vacancy), Vaca
     override fun back() {
         router.exit()
     }
+
 }

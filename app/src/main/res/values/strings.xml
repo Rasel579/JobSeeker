@@ -5,4 +5,5 @@
     <string name="helper_text_searching">Enter a profession you are looking for</string>
     <string name="looking_search_label">Enter Duty</string>
     <string name="search_txt_btn">SEARCH</string>
+    <string name="btn_text_apply_job">APPLY JOB</string>
 </resources>

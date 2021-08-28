@@ -8,19 +8,13 @@ import moxy.MvpPresenter
 class SearchPresenter(private val router: Router) : MvpPresenter<SearchView>() {
     fun searchEvent(searchVal: String?) {
         if (!searchVal.isNullOrBlank()) {
-            router.navigateTo(ViewPagerVacancyScreen.create(searchVal), true)
+            router.navigateTo(ViewPagerVacancyScreen.create(searchVal))
         } else {
             viewState.showError("Empty String")
+            viewState.setListener()
         }
     }
-
     override fun onFirstViewAttach() {
         viewState.setListener()
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewState.showError("error")
-    }
-
 }

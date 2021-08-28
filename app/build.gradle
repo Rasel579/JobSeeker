@@ -22,6 +22,8 @@ android {
         properties.load(project.rootProject.file('apikey.properties').newDataInputStream())
         def appId = properties.getProperty("adzuna_app_id", "")
         def appKey = properties.getProperty("adzuna_app_key", "")
+        def yndxKey = properties.getProperty("yandex_maps_api_key", "")
+        it.buildConfigField "String", "YANDEX_MAP_API_KEY", yndxKey
         it.buildConfigField "String", "ADZUNA_APP_ID", appId
         it.buildConfigField "String", "ADZUNA_APP_KEY", appKey
     }
@@ -78,7 +80,10 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:2.37"
     kapt "com.google.dagger:dagger-compiler:2.35.1"
     kapt "com.google.dagger:dagger-android-processor:2.35.1"
+    /**Yandex Api**/
+    implementation 'com.yandex.android:maps.mobile:4.0.0-lite'
 
+    
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
