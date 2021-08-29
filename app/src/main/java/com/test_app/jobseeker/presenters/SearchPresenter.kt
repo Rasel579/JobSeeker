@@ -14,6 +14,7 @@ class SearchPresenter(private val router: Router) : MvpPresenter<SearchView>() {
             viewState.setListener()
         }
     }
+
     override fun onFirstViewAttach() {
         viewState.setListener()
     }

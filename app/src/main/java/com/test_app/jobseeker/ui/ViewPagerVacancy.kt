@@ -13,12 +13,12 @@ import com.test_app.jobseeker.R
 import com.test_app.jobseeker.databinding.FragmentViewPagerVacancyBinding
 import com.test_app.jobseeker.models.Repo
 import com.test_app.jobseeker.models.api.data.JobsDTO
+import com.test_app.jobseeker.presenters.ItemVacancyPresenter
 import com.test_app.jobseeker.presenters.VacancyPresenter
 import com.test_app.jobseeker.ui.daggerAbs.AbsFragment
 import com.test_app.jobseeker.utils.maps.MapView
 import com.test_app.jobseeker.utils.schedulers.Schedulers
 import com.test_app.jobseeker.view.VacancyView
-import kotlinx.android.synthetic.main.activity_main.view.*
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
@@ -40,7 +40,7 @@ class ViewPagerVacancy : AbsFragment(R.layout.fragment_view_pager_vacancy), Vaca
     lateinit var router: Router
 
     @Inject
-    lateinit var map : MapView
+    lateinit var map: MapView
 
     @Inject
     lateinit var repo: Repo
@@ -50,6 +50,12 @@ class ViewPagerVacancy : AbsFragment(R.layout.fragment_view_pager_vacancy), Vaca
     private val presenter by moxyPresenter {
         VacancyPresenter(
             searchingVal,
+            repo,
+            schedulers
+        )
+    }
+    private val itemPresenter by moxyPresenter {
+        ItemVacancyPresenter(
             repo,
             schedulers
         )
@@ -64,7 +70,7 @@ class ViewPagerVacancy : AbsFragment(R.layout.fragment_view_pager_vacancy), Vaca
 
 
     override fun showData(data: JobsDTO) {
-        viewBinding.viewPager.adapter = ViewPagerAdapter(data, map)
+        viewBinding.viewPager.adapter = ViewPagerAdapter(data, map, itemPresenter)
     }
 
     override fun showError(error: Throwable) {

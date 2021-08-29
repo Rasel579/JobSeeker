@@ -5,15 +5,19 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.test_app.jobseeker.databinding.ItemVacancyLayoutBinding
 import com.test_app.jobseeker.models.api.data.JobsDTO
 import com.test_app.jobseeker.models.api.data.Result
+import com.test_app.jobseeker.presenters.ItemVacancyPresenter
 import com.test_app.jobseeker.utils.maps.MapView
+import com.test_app.jobseeker.view.ItemVacancyView
 import com.yandex.mapkit.MapKitFactory
 
 class ViewPagerAdapter(
-    private val data: JobsDTO,
-    private val map: MapView
+    private var data: JobsDTO,
+    private val map: MapView,
+    private val itemPresenter: ItemVacancyPresenter
 ) : RecyclerView.Adapter<ViewPagerAdapter.ViewHolderVacancy>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderVacancy =
@@ -49,11 +53,12 @@ class ViewPagerAdapter(
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(results[position].url))
                 root.context.startActivity(intent)
             }
+            binding.btnFavorite.setOnClickListener {
+                itemPresenter.addFavoriteVacancy(data.results[position])
+            }
         }
-
         fun start() {
             binding.yandexMap.onStart()
         }
-
     }
 }

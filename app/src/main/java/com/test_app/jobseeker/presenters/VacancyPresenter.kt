@@ -14,14 +14,17 @@ class VacancyPresenter(
 ) : MvpPresenter<VacancyView>() {
     private val dispose = CompositeDisposable()
     override fun onFirstViewAttach() {
-        dispose += repo.getJobs(searchVal)
+       findJob(searchVal, page = 1)
+    }
+
+    private fun findJob(searchVal: String?, page: Int){
+        dispose += repo.getJobs(searchVal, page)
             .observeOn(schedulers.main())
             .subscribe(
                 viewState::showData,
                 viewState::showError
             )
     }
-
     override fun onDestroy() {
         dispose.clear()
     }

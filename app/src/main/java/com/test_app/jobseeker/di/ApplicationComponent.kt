@@ -5,6 +5,7 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.test_app.jobseeker.JobSeekerApp
 import com.test_app.jobseeker.di.modules.ApiModule
+import com.test_app.jobseeker.di.modules.CacheModule
 import com.test_app.jobseeker.di.modules.JobSeekerModule
 import com.test_app.jobseeker.utils.schedulers.Schedulers
 import dagger.BindsInstance
@@ -14,7 +15,7 @@ import dagger.android.AndroidInjector
 import javax.inject.Singleton
 @Singleton
 @Component(modules = [AndroidInjectionModule::class, JobSeekerModule::class,
-    ApiModule::class])
+    ApiModule::class, CacheModule::class])
 interface ApplicationComponent: AndroidInjector<JobSeekerApp> {
    @Component.Builder
    interface Builder{
