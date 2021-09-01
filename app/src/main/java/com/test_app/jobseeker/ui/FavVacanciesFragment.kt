@@ -1,5 +1,6 @@
 package com.test_app.jobseeker.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +23,9 @@ class FavVacanciesFragment : AbsFragment(R.layout.fragment_fav_vacancies), FavVa
     companion object {
         fun newInstance() = FavVacanciesFragment()
     }
+
     private val viewBinding: FragmentFavVacanciesBinding by viewBinding(CreateMethod.INFLATE)
+
     @Inject
     lateinit var repo: Repo
 
@@ -42,8 +45,10 @@ class FavVacanciesFragment : AbsFragment(R.layout.fragment_fav_vacancies), FavVa
         return viewBinding.root
     }
 
-    override fun setData(data: List<Result>) {
-        viewBinding.adapterFav.adapter = AdapterFavVacancies(data)
+    @SuppressLint("NotifyDataSetChanged")
+    override fun setData(data: List<Result>) = with(viewBinding) {
+        adapterFav.adapter = AdapterFavVacancies(data)
+
     }
 
     override fun showError(error: Throwable) {

@@ -7,7 +7,6 @@ import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.test_app.jobseeker.R
 import com.test_app.jobseeker.databinding.ActivityMainBinding
-import com.test_app.jobseeker.navigation.FavoriteScreen
 import com.test_app.jobseeker.navigation.SearchScreen
 import com.test_app.jobseeker.presenters.MainPresenter
 import com.test_app.jobseeker.ui.daggerAbs.AbsActivity
@@ -33,13 +32,6 @@ class MainActivity : AbsActivity(R.layout.activity_main), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewBinding.toolBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.favorite_menu -> router.navigateTo(FavoriteScreen.create())
-            }
-            false
-        }
         savedInstanceState ?: router.newRootChain(SearchScreen.create())
     }
 

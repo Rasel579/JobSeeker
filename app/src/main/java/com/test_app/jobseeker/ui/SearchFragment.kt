@@ -1,7 +1,6 @@
 package com.test_app.jobseeker.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,11 @@ import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.test_app.jobseeker.R
 import com.test_app.jobseeker.databinding.FragmentSearchBinding
+import com.test_app.jobseeker.navigation.FavoriteScreen
 import com.test_app.jobseeker.presenters.SearchPresenter
 import com.test_app.jobseeker.ui.daggerAbs.AbsFragment
 import com.test_app.jobseeker.view.SearchView
+import kotlinx.android.synthetic.main.activity_main.view.*
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
@@ -40,12 +41,32 @@ class SearchFragment : AbsFragment(R.layout.fragment_search), SearchView {
         this.view?.let { Snackbar.make(it, msg, BaseTransientBottomBar.LENGTH_SHORT).show() }
     }
 
-    override fun setListener() {
-        viewBinding.searchBtn.setOnClickListener {
-            Log.e("text", viewBinding.searcher.editText?.text.toString())
-            presenter.searchEvent(viewBinding.searcher.editText?.text.toString())
+    override fun setMenu() {
+        viewBinding.root.rootView.tool_bar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.filter_menu -> presenter.sliderExpanded()
+                R.id.favorite_menu -> router.navigateTo(FavoriteScreen.create(), true)
+            }
+            false
         }
     }
 
+    override fun showFilter() {
+        viewBinding.navigationView.visibility = View.VISIBLE
+    }
+
+    override fun hideFilter() {
+        viewBinding.navigationView.visibility = View.GONE
+    }
+
+    override fun setListener() {
+        viewBinding.searchBtn.setOnClickListener {
+            presenter.searchEvent(viewBinding.searcher.editText?.text.toString())
+        }
+        viewBinding.navigationView.setNavigationItemSelectedListener {
+            presenter.selectedCountry(it.titleCondensed)
+            false
+        }
+    }
 
 }

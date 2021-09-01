@@ -1,5 +1,6 @@
 package com.test_app.jobseeker.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,6 @@ import com.test_app.jobseeker.R
 import com.test_app.jobseeker.databinding.FragmentViewPagerVacancyBinding
 import com.test_app.jobseeker.models.Repo
 import com.test_app.jobseeker.models.api.data.JobsDTO
-import com.test_app.jobseeker.presenters.ItemVacancyPresenter
 import com.test_app.jobseeker.presenters.VacancyPresenter
 import com.test_app.jobseeker.ui.daggerAbs.AbsFragment
 import com.test_app.jobseeker.utils.maps.MapView
@@ -26,13 +26,17 @@ import javax.inject.Inject
 class ViewPagerVacancy : AbsFragment(R.layout.fragment_view_pager_vacancy), VacancyView {
     companion object {
         private const val ARG_DUTY = "arg_duty"
-        fun newInstance(searchVal: String) = ViewPagerVacancy().apply {
-            arguments = bundleOf(ARG_DUTY to searchVal)
+        private const val ARG_LOCATION = "arg_location"
+        fun newInstance(searchVal: String?, countrySearch: String?) = ViewPagerVacancy().apply {
+            arguments = bundleOf(ARG_DUTY to searchVal, ARG_LOCATION to countrySearch)
         }
     }
 
     private val searchingVal: String? by lazy {
         arguments?.getString(ARG_DUTY)
+    }
+    private val countrySearch: String? by lazy {
+        arguments?.getString(ARG_LOCATION)
     }
     private val viewBinding: FragmentViewPagerVacancyBinding by viewBinding(CreateMethod.INFLATE)
 
@@ -50,16 +54,12 @@ class ViewPagerVacancy : AbsFragment(R.layout.fragment_view_pager_vacancy), Vaca
     private val presenter by moxyPresenter {
         VacancyPresenter(
             searchingVal,
+            countrySearch,
             repo,
             schedulers
         )
     }
-    private val itemPresenter by moxyPresenter {
-        ItemVacancyPresenter(
-            repo,
-            schedulers
-        )
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,12 +69,19 @@ class ViewPagerVacancy : AbsFragment(R.layout.fragment_view_pager_vacancy), Vaca
     }
 
 
-    override fun showData(data: JobsDTO) {
-        viewBinding.viewPager.adapter = ViewPagerAdapter(data, map, itemPresenter)
+    @SuppressLint("NotifyDataSetChanged")
+    override fun showData(data: JobsDTO) = with(viewBinding) {
+        viewPager.adapter = ViewPagerAdapter(data, map, presenter, countrySearch, searchingVal)
+        (viewPager.adapter as ViewPagerAdapter).notifyDataSetChanged()
+
     }
 
     override fun showError(error: Throwable) {
         error.message?.let { Snackbar.make(viewBinding.root, it, Snackbar.LENGTH_SHORT).show() }
+    }
+
+    override fun showSuccess(msg: String) {
+        Snackbar.make(viewBinding.root, msg, Snackbar.LENGTH_SHORT).show()
     }
 
     override fun back() {

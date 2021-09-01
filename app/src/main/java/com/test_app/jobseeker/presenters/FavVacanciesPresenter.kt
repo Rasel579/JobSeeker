@@ -10,7 +10,7 @@ import moxy.MvpPresenter
 class FavVacanciesPresenter(
     private val repo: Repo,
     private val schedulers: Schedulers
-    ): MvpPresenter<FavVacanciesView>() {
+) : MvpPresenter<FavVacanciesView>() {
     private val disposable = CompositeDisposable()
     override fun onFirstViewAttach() {
         disposable += repo.getFavoriteJobs().observeOn(schedulers.main()).subscribe(

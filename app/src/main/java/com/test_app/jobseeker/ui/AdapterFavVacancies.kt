@@ -7,7 +7,7 @@ import com.test_app.jobseeker.databinding.ItemFavoriteVacancyBinding
 import com.test_app.jobseeker.models.api.data.Result
 
 class AdapterFavVacancies(
-    private val data: List<Result>
+    private val data: List<Result>,
 ) : RecyclerView.Adapter<AdapterFavVacancies.ItemFavVacancies>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemFavVacancies =
         ItemFavVacancies(
