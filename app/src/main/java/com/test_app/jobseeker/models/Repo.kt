@@ -7,7 +7,8 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 
 interface Repo {
-    fun getJobs(countrySearch: String?, searchVal: String?,  page: Int): Observable<JobsDTO>
+    fun getJobs(countrySearch: String?, searchVal: String?, page: Int): Observable<JobsDTO>
     fun addFav(result: Result): Completable
     fun getFavoriteJobs(): Single<List<Result>>
+    fun deleteFromFavorite(result: Result): Completable
 }

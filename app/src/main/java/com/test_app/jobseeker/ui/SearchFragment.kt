@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.LinearInterpolator
 import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.terrakok.cicerone.Router
@@ -52,11 +54,15 @@ class SearchFragment : AbsFragment(R.layout.fragment_search), SearchView {
     }
 
     override fun showFilter() {
-        viewBinding.navigationView.visibility = View.VISIBLE
+        viewBinding.navigationView.animate().x(500f).alpha(100f)
+            .setInterpolator(LinearInterpolator())
     }
 
     override fun hideFilter() {
-        viewBinding.navigationView.visibility = View.GONE
+        viewBinding.navigationView
+            .animate()
+            .x(2000f)
+            .interpolator = LinearInterpolator()
     }
 
     override fun setListener() {

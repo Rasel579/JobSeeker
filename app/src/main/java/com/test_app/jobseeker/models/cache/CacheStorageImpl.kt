@@ -36,4 +36,9 @@ class CacheStorageImpl @Inject constructor(
     override fun getAll(): Single<List<com.test_app.jobseeker.models.cache.Result>> =
         db.jobs.getAll().subscribeOn(schedulers.io())
 
+    override fun delete(job: Result): Completable = db
+        .jobs
+        .find(job.title)
+        .flatMapCompletable { db.jobs.delete(it) }
+        .subscribeOn(schedulers.io())
 }

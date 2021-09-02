@@ -47,11 +47,17 @@ class FavVacanciesFragment : AbsFragment(R.layout.fragment_fav_vacancies), FavVa
 
     @SuppressLint("NotifyDataSetChanged")
     override fun setData(data: List<Result>) = with(viewBinding) {
-        adapterFav.adapter = AdapterFavVacancies(data)
+        adapterFav.adapter = AdapterFavVacancies(data, presenter)
 
     }
 
     override fun showError(error: Throwable) {
         error.message?.let { Snackbar.make(viewBinding.root, it, Snackbar.LENGTH_SHORT).show() }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun showSuccess(msg: String) {
+        Snackbar.make(viewBinding.root, msg, Snackbar.LENGTH_SHORT).show()
+        viewBinding.adapterFav.adapter?.notifyDataSetChanged()
     }
 }

@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.test_app.jobseeker.databinding.ItemFavoriteVacancyBinding
 import com.test_app.jobseeker.models.api.data.Result
+import com.test_app.jobseeker.presenters.FavVacanciesPresenter
 
 class AdapterFavVacancies(
     private val data: List<Result>,
+    private val presenter: FavVacanciesPresenter,
 ) : RecyclerView.Adapter<AdapterFavVacancies.ItemFavVacancies>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemFavVacancies =
         ItemFavVacancies(
@@ -20,6 +22,7 @@ class AdapterFavVacancies(
 
     override fun onBindViewHolder(holder: ItemFavVacancies, position: Int) {
         holder.setData(data, position)
+
     }
 
     override fun getItemCount(): Int = data.size
@@ -27,11 +30,14 @@ class AdapterFavVacancies(
     inner class ItemFavVacancies(
         private val binding: ItemFavoriteVacancyBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun setData(data: List<Result>, position: Int) {
-            binding.companyName.text = data[position].company.displayName
-            binding.role.text = data[position].title
-            binding.text.text = data[position].description
-            binding.location.text = data[position].location.displayLocation
+        fun setData(data: List<Result>, position: Int)= with(binding) {
+            companyName.text = data[position].company.displayName
+            role.text = data[position].title
+            text.text = data[position].description
+            location.text = data[position].location.displayLocation
+            deleteBtn.setOnClickListener {
+                presenter.deleteJob(data[position])
+            }
         }
 
     }

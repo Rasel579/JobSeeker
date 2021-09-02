@@ -24,7 +24,10 @@ class VacancyPresenter(
         dispose += repo.getJobs(searchVal, countrySearch, page)
             .observeOn(schedulers.main())
             .subscribe(
-                viewState::showData,
+                {
+                    viewState.hideProgressBar()
+                    viewState.showData(it)
+                },
                 viewState::showError
             )
     }

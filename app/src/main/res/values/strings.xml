@@ -22,4 +22,5 @@
     <string name="filter_menu_county_subtitle_de">de</string>
     <string name="filter_menu_county_subtitle_ca">ca</string>
     <string name="filter_menu_county_subtitle_gb">gb</string>
+    <string name="delete_from_favorite_btn">DELETE</string>
 </resources>

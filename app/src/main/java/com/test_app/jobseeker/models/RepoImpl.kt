@@ -4,6 +4,7 @@ import com.test_app.jobseeker.models.api.data.*
 import com.test_app.jobseeker.models.cache.CacheDataSource
 import com.test_app.jobseeker.models.cloud.CloudDataSource
 import com.test_app.jobseeker.utils.schedulers.Schedulers
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
@@ -41,4 +42,6 @@ class RepoImpl @Inject constructor(
             )
         }
     }.subscribeOn(schedulers.io())
+
+    override fun deleteFromFavorite(job: Result) : Completable = cache.delete(job)
 }

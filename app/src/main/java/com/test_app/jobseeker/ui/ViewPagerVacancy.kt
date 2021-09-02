@@ -84,6 +84,10 @@ class ViewPagerVacancy : AbsFragment(R.layout.fragment_view_pager_vacancy), Vaca
         Snackbar.make(viewBinding.root, msg, Snackbar.LENGTH_SHORT).show()
     }
 
+    override fun hideProgressBar() {
+          viewBinding.progressBar.visibility = View.GONE
+    }
+
     override fun back() {
         router.exit()
     }

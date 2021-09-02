@@ -19,11 +19,11 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
-        android:layout_width="160dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:layout_marginTop="80dp"
-        android:visibility="gone"
+        android:layout_marginTop="50dp"
+        android:alpha="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

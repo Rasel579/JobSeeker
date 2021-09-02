@@ -1,6 +1,8 @@
 package com.test_app.jobseeker.presenters
 
+import com.test_app.jobseeker.extensions.SUCCESS_DELETE_FROM_FAVORITE_MSG
 import com.test_app.jobseeker.models.Repo
+import com.test_app.jobseeker.models.api.data.Result
 import com.test_app.jobseeker.utils.schedulers.Schedulers
 import com.test_app.jobseeker.view.FavVacanciesView
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -16,6 +18,15 @@ class FavVacanciesPresenter(
         disposable += repo.getFavoriteJobs().observeOn(schedulers.main()).subscribe(
             viewState::setData,
             viewState::showError
+        )
+    }
+
+    fun deleteJob(job: Result){
+        disposable+= repo.deleteFromFavorite(job)
+            .observeOn(schedulers.main())
+            .subscribe(
+                {viewState.showSuccess(SUCCESS_DELETE_FROM_FAVORITE_MSG)},
+                viewState::showError
         )
     }
 

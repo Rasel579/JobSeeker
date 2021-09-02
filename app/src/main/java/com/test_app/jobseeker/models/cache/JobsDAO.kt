@@ -8,8 +8,14 @@ import io.reactivex.rxjava3.core.Single
 @Dao
 interface JobsDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertJob(job: Result) :Completable
+    fun insertJob(job: Result): Completable
 
     @Query("SELECT * FROM Result")
     fun getAll(): Single<List<Result>>
+
+    @Delete
+    fun delete(job: Result): Completable
+
+    @Query("SELECT * FROM Result WHERE title = :title ")
+    fun  find(title : String) : Single<Result>
 }

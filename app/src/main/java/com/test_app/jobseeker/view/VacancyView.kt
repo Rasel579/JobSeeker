@@ -9,5 +9,6 @@ interface VacancyView : MvpView {
     fun showData(data: JobsDTO)
     fun showError(error: Throwable)
     fun showSuccess(msg: String)
+    fun hideProgressBar()
     fun back()
 }
