@@ -1,5 +1,6 @@
 package com.test_app.jobseeker.models.cache
 
+import android.util.Log
 import com.test_app.jobseeker.models.api.data.Result
 import com.test_app.jobseeker.utils.schedulers.Schedulers
 import io.reactivex.rxjava3.core.Completable
@@ -12,7 +13,7 @@ class CacheStorageImpl @Inject constructor(
 ) : CacheDataSource {
     override fun insert(result: Result): Completable = Completable.fromCallable {
         val roomJobs = Result(
-            0,
+            result.id.toInt(),
             Category(0, result.category.label, result.category.tag),
             Company(0, result.company.displayName),
             result.created,
@@ -36,9 +37,6 @@ class CacheStorageImpl @Inject constructor(
     override fun getAll(): Single<List<com.test_app.jobseeker.models.cache.Result>> =
         db.jobs.getAll().subscribeOn(schedulers.io())
 
-    override fun delete(job: Result): Completable = db
-        .jobs
-        .find(job.title)
-        .flatMapCompletable { db.jobs.delete(it) }
+    override fun delete(id: Int): Completable = Completable.complete()
         .subscribeOn(schedulers.io())
 }

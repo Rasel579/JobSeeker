@@ -24,7 +24,7 @@ class FavVacanciesPresenter(
     }
 
     fun deleteJob(job: Result){
-        disposable+= repo.deleteFromFavorite(job)
+        disposable+= repo.deleteFromFavorite(job.id.toInt())
             .observeOn(schedulers.main())
             .subscribe(
                 {viewState.showSuccess(SUCCESS_DELETE_FROM_FAVORITE_MSG)},

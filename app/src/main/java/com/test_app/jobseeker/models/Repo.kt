@@ -10,5 +10,5 @@ interface Repo {
     fun getJobs(countrySearch: String?, searchVal: String?, page: Int): Observable<JobsDTO>
     fun addFav(result: Result): Completable
     fun getFavoriteJobs(): Single<List<Result>>
-    fun deleteFromFavorite(result: Result): Completable
+    fun deleteFromFavorite(id: Int): Completable
 }

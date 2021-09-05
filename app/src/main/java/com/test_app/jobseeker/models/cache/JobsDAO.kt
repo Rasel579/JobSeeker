@@ -9,12 +9,12 @@ interface JobsDAO {
     @Insert
     fun insertJob(job: Result): Completable
 
-    @Query("SELECT * FROM Result")
+    @Query(value = "SELECT * FROM jobs")
     fun getAll(): Single<List<Result>>
 
-    @Query("SELECT * FROM result WHERE title = :title ")
-    fun  find(title : String) : Single<Result>
+    @Query(value = "SELECT * FROM jobs WHERE resultId = :id")
+    fun  find(id : Int) : Single<Result>
 
-    @Delete
-    fun delete(job: Result): Completable
+//    @Query(value = "DELETE FROM jobs WHERE  resultId = :id")
+//    fun delete(id: Int): Completable
 }

@@ -22,7 +22,9 @@ class RepoImpl @Inject constructor(
         .getJobs(countrySearch,searchVal, page)
         .toObservable().subscribeOn(schedulers.io())
 
-    override fun addFav(result: Result) = cache.insert(result)
+    override fun addFav(result: Result): Completable = cache
+        .insert(result)
+        .subscribeOn(schedulers.io())
     override fun getFavoriteJobs(): Single<List<Result>> = cache.getAll().map { result ->
         result.map {
             Result(
@@ -43,5 +45,7 @@ class RepoImpl @Inject constructor(
         }
     }.subscribeOn(schedulers.io())
 
-    override fun deleteFromFavorite(job: Result) : Completable = cache.delete(job)
+    override fun deleteFromFavorite(id: Int) : Completable = cache
+        .delete(id)
+        .subscribeOn(schedulers.io())
 }
