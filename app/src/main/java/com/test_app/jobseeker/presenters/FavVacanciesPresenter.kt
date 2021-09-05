@@ -1,5 +1,6 @@
 package com.test_app.jobseeker.presenters
 
+import android.util.Log
 import com.test_app.jobseeker.extensions.SUCCESS_DELETE_FROM_FAVORITE_MSG
 import com.test_app.jobseeker.models.Repo
 import com.test_app.jobseeker.models.api.data.Result
@@ -16,7 +17,8 @@ class FavVacanciesPresenter(
     private val disposable = CompositeDisposable()
     override fun onFirstViewAttach() {
         disposable += repo.getFavoriteJobs().observeOn(schedulers.main()).subscribe(
-            viewState::setData,
+            {viewState.setData(it)
+            Log.e("favorite", it.toString())},
             viewState::showError
         )
     }

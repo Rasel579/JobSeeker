@@ -1,5 +1,6 @@
 package com.test_app.jobseeker.presenters
 
+import android.util.Log
 import com.test_app.jobseeker.extensions.SUCCESS_ADD_TO_FAVORITE_MSG
 import com.test_app.jobseeker.models.Repo
 import com.test_app.jobseeker.models.api.data.Result
@@ -35,7 +36,8 @@ class VacancyPresenter(
     fun addFavoriteVacancy(result: Result) {
         dispose += repo.addFav(result).observeOn(schedulers.main())
             .subscribe(
-                { viewState.showSuccess(SUCCESS_ADD_TO_FAVORITE_MSG) },
+                { viewState.showSuccess(SUCCESS_ADD_TO_FAVORITE_MSG)
+                Log.e("added", result.toString())},
                 viewState::showError
             )
     }
