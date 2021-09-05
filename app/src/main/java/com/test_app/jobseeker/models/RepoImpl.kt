@@ -45,7 +45,7 @@ class RepoImpl @Inject constructor(
         }
     }.subscribeOn(schedulers.io())
 
-    override fun deleteFromFavorite(id: Int) : Completable = cache
-        .delete(id)
+    override fun deleteFromFavorite(description: String) : Completable = cache
+        .delete(description)
         .subscribeOn(schedulers.io())
 }
