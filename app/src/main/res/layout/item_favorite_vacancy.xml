@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="50dp"
+    android:layout_marginTop="10dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="20dp"
     app:strokeColor="@color/purple_700"
     app:strokeWidth="1dp">
 
     <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -43,9 +44,18 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <androidx.constraintlayout.utils.widget.MotionButton
+                android:id="@+id/url_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:text="@string/apply_job_fav_vacancy_btn"/>
+            <androidx.constraintlayout.utils.widget.MotionButton
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/delete_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:text="@string/delete_from_favorite_btn"/>
         </LinearLayout>

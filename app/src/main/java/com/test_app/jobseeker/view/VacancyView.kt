@@ -10,5 +10,6 @@ interface VacancyView : MvpView {
     fun showError(error: Throwable)
     fun showSuccess(msg: String)
     fun hideProgressBar()
+    fun attachTabLayout()
     fun back()
 }

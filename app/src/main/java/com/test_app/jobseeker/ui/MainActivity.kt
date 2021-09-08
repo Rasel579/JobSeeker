@@ -3,7 +3,6 @@ package com.test_app.jobseeker.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
@@ -18,7 +17,7 @@ import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
 class MainActivity : AbsActivity(R.layout.activity_main), MainView {
-    private val navigator = object: AppNavigator(this, R.id.container){
+    private val navigator = object : AppNavigator(this, R.id.container) {
         override fun setupFragmentTransaction(
             fragmentTransaction: FragmentTransaction,
             currentFragment: Fragment?,

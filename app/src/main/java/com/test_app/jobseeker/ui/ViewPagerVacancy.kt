@@ -10,6 +10,7 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.terrakok.cicerone.Router
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.tabs.TabLayoutMediator
 import com.test_app.jobseeker.R
 import com.test_app.jobseeker.databinding.FragmentViewPagerVacancyBinding
 import com.test_app.jobseeker.models.Repo
@@ -73,7 +74,9 @@ class ViewPagerVacancy : AbsFragment(R.layout.fragment_view_pager_vacancy), Vaca
     override fun showData(data: JobsDTO) = with(viewBinding) {
         viewPager.adapter = ViewPagerAdapter(data, map, presenter, countrySearch, searchingVal)
         (viewPager.adapter as ViewPagerAdapter).notifyDataSetChanged()
-
+        TabLayoutMediator(viewBinding.tabView, viewBinding.viewPager) { tab, position ->
+            tab.text = data.results[position].company.displayName
+        }.attach()
     }
 
     override fun showError(error: Throwable) {
@@ -86,6 +89,10 @@ class ViewPagerVacancy : AbsFragment(R.layout.fragment_view_pager_vacancy), Vaca
 
     override fun hideProgressBar() {
           viewBinding.progressBar.visibility = View.GONE
+    }
+
+    override fun attachTabLayout() {
+
     }
 
     override fun back() {

@@ -6,7 +6,7 @@ import moxy.viewstate.strategy.alias.AddToEndSingle
 
 @AddToEndSingle
 interface FavVacanciesView : MvpView {
-    fun setData(data: List<Result>)
+    fun setData(data: MutableList<Result>)
     fun showError(error: Throwable)
     fun showSuccess(msg: String)
 }

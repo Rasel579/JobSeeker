@@ -17,8 +17,10 @@ class FavVacanciesPresenter(
     private val disposable = CompositeDisposable()
     override fun onFirstViewAttach() {
         disposable += repo.getFavoriteJobs().observeOn(schedulers.main()).subscribe(
-            {viewState.setData(it)
-            Log.e("favorite", it.toString())},
+            {   val data = mutableListOf<Result>()
+                data.addAll(it)
+                viewState.setData(data)
+            },
             viewState::showError
         )
     }
