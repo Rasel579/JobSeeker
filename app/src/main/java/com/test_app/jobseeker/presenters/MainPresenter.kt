@@ -4,16 +4,15 @@ import com.github.terrakok.cicerone.Router
 import com.test_app.jobseeker.navigation.SearchScreen
 import com.test_app.jobseeker.view.MainView
 import moxy.MvpPresenter
-import moxy.MvpView
 
-class MainPresenter(private val router: Router) :MvpPresenter<MainView>() {
+class MainPresenter(private val router: Router) : MvpPresenter<MainView>() {
     override fun onFirstViewAttach() {
-        router.navigateTo(SearchScreen.create())
+        router.navigateTo(SearchScreen.create(), true)
         viewState.setBackButtonListener()
     }
 
-    fun onBackButtonPressed(){
-        router.navigateTo(SearchScreen.create())
+    fun onBackButtonPressed() {
+        router.navigateTo(SearchScreen.create(), true)
     }
 
 }

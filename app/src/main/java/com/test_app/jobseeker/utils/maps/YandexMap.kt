@@ -6,22 +6,22 @@ import com.yandex.mapkit.map.CameraPosition
 import javax.inject.Inject
 
 
-class YandexMap @Inject constructor(): MapView {
+class YandexMap @Inject constructor() : MapView {
     override fun showMap(
         longitude: Double,
         latitude: Double,
         mapView: com.yandex.mapkit.mapview.MapView
     ) {
-           mapView.map.move(
-               CameraPosition(
-                   Point(longitude, latitude),
-                   11.0f,
-                   0.0f,
-                   0.0f
-               ),
-               Animation(Animation.Type.SMOOTH, 0f),
-               null
-           )
+        mapView.map.move(
+            CameraPosition(
+                Point(longitude, latitude),
+                11.0f,
+                0.0f,
+                0.0f
+            ),
+            Animation(Animation.Type.SMOOTH, 0f),
+            null
+        )
     }
 
     override fun onStart(mapView: com.yandex.mapkit.mapview.MapView) {

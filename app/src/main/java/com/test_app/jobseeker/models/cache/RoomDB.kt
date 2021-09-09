@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 
 @Database(
     entities = [Result::class, Category::class, Company::class, Location::class],
-    version = 2,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(AreaConverter::class)

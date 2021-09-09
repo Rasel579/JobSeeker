@@ -4,7 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity()
+@Entity(tableName = "jobs")
 data class Result(
     @PrimaryKey(autoGenerate = true)
     val resultId: Int,

@@ -1,7 +1,9 @@
 package com.test_app.jobseeker.models.cache
 
+import android.util.Log
 import com.test_app.jobseeker.models.api.data.Result
 import com.test_app.jobseeker.utils.schedulers.Schedulers
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
@@ -9,7 +11,7 @@ class CacheStorageImpl @Inject constructor(
     private val db: RoomDB,
     private val schedulers: Schedulers
 ) : CacheDataSource {
-    override fun insert(result: Result): Single<Unit> = Single.fromCallable {
+    override fun insert(result: Result): Completable = Completable.fromCallable {
         val roomJobs = Result(
             0,
             Category(0, result.category.label, result.category.tag),
@@ -35,4 +37,7 @@ class CacheStorageImpl @Inject constructor(
     override fun getAll(): Single<List<com.test_app.jobseeker.models.cache.Result>> =
         db.jobs.getAll().subscribeOn(schedulers.io())
 
+    override fun delete(description: String): Completable = Completable.fromCallable {
+     db.jobs.delete(description)
+    }.subscribeOn(schedulers.io())
 }

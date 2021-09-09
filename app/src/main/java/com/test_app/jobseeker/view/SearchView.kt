@@ -11,4 +11,7 @@ import moxy.viewstate.strategy.alias.OneExecution
 interface SearchView : MvpView {
     fun setListener()
     fun showError(msg: String)
+    fun setMenu()
+    fun showFilter()
+    fun hideFilter()
 }

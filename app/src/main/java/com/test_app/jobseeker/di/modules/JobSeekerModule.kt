@@ -15,7 +15,6 @@ import com.test_app.jobseeker.utils.maps.YandexMap
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import javax.inject.Singleton
 
 @Module
 interface JobSeekerModule {
@@ -31,19 +30,15 @@ interface JobSeekerModule {
     @ContributesAndroidInjector
     fun bindFavVacanciesFragment(): FavVacanciesFragment
 
-    @Singleton
     @Binds
     fun bindCloud(retrofit: RetrofitImpl): CloudDataSource
 
-    @Singleton
     @Binds
     fun bindRepo(repo: RepoImpl): Repo
 
-    @Singleton
     @Binds
     fun bindMap(map: YandexMap): MapView
 
-    @Singleton
     @Binds
     fun bindCacheStorage(storage: CacheStorageImpl): CacheDataSource
 }

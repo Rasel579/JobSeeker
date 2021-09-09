@@ -10,8 +10,8 @@ class RetrofitImpl @Inject constructor(
     private val api: ServiceApi,
     private val schedulers: Schedulers
 ) : CloudDataSource {
-    override fun getJobs(searchValue: String?, page: Int): Maybe<JobsDTO> =
-        api.seekJobs(page, searchValue)
+    override fun getJobs( countrySearch: String?,searchValue: String?, page: Int): Maybe<JobsDTO> =
+        api.seekJobs(countrySearch, page, searchValue)
             .subscribeOn(schedulers.io())
 
 }

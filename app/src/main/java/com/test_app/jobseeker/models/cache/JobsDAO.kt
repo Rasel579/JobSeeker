@@ -1,14 +1,20 @@
 package com.test_app.jobseeker.models.cache
 
 import androidx.room.*
-import com.test_app.jobseeker.models.api.data.Category
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 @Dao
 interface JobsDAO {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert
     fun insertJob(job: Result)
 
-    @Query("SELECT * FROM Result")
+    @Query(value = "SELECT * FROM jobs")
     fun getAll(): Single<List<Result>>
+
+    @Query(value = "SELECT * FROM jobs WHERE resultId = :id")
+    fun find(id : Int) : Single<Result>
+
+    @Query(value = "DELETE FROM jobs WHERE  description = :description")
+    fun delete(description: String)
 }
