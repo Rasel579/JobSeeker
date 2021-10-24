@@ -7,6 +7,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.test_app.jobseeker.R
 import com.test_app.jobseeker.databinding.ActivityMainBinding
 import com.test_app.jobseeker.navigation.SearchScreen
@@ -19,9 +20,10 @@ import javax.inject.Inject
 class MainActivity : AbsActivity(R.layout.activity_main), MainView {
     private val navigator = object : AppNavigator(this, R.id.container) {
         override fun setupFragmentTransaction(
+            screen: FragmentScreen,
             fragmentTransaction: FragmentTransaction,
             currentFragment: Fragment?,
-            nextFragment: Fragment?
+            nextFragment: Fragment
         ) {
             fragmentTransaction.setCustomAnimations(
                 R.anim.slide_out,

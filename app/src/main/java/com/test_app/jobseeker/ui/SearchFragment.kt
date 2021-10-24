@@ -46,7 +46,7 @@ class SearchFragment : AbsFragment(R.layout.fragment_search), SearchView {
         viewBinding.root.rootView.tool_bar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.filter_menu -> presenter.sliderExpanded()
-                R.id.favorite_menu -> router.navigateTo(FavoriteScreen.create(), true)
+                R.id.favorite_menu -> router.navigateTo(FavoriteScreen.create())
             }
             false
         }

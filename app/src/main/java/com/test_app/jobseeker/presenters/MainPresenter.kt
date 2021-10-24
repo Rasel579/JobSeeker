@@ -7,12 +7,12 @@ import moxy.MvpPresenter
 
 class MainPresenter(private val router: Router) : MvpPresenter<MainView>() {
     override fun onFirstViewAttach() {
-        router.navigateTo(SearchScreen.create(), true)
+        router.navigateTo(SearchScreen.create())
         viewState.setBackButtonListener()
     }
 
     fun onBackButtonPressed() {
-        router.navigateTo(SearchScreen.create(), true)
+        router.navigateTo(SearchScreen.create())
     }
 
 }
