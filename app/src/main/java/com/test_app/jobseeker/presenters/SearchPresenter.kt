@@ -19,8 +19,7 @@ class SearchPresenter(private val router: Router) : MvpPresenter<SearchView>() {
                 ViewPagerVacancyScreen.create(
                     searchVal,
                     countrySearch
-                ),
-                true
+                )
             )
         } else {
             viewState.showError(EMPTY_FIELD_ERROR_MSG)
